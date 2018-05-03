@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="hitarea">Touch me</div>
+    <div id="eventname">-</div>
+    <div id="cords">X:<span id="x"></span>Y:<span id="y"></span></div>
+
+    <script>
+    let el_hitarea = document.getElementById('hitarea')
+    let el_eventname = document.getElementById('eventname')
+    let el_x = document.getElementById('x')
+    let el_y = document.getElementById('y')
+
+    let updateXY = function(event) {
+        el_x.innerHTML = event.changedTouches[0].pageX
+        el_x.innerHTML = event.changedTouches[0].pageY
+    }
+    let updateEventname = function(eventname) {
+        el_eventname.innerHTML = eventname
+    }
+
+    el_hitarea.addEventListener('touchstart', function(event) {
+        updateEventname('touchstart')
+        updateXY(event)
+        el_hitarea.style.backgroundColor = 'red'
+    }, false)
+
+    el_hitarea.addEventListener('touchmove', function(event) {
+        event.preventDefault()
+        updateEventname('touchmove')
+        updateXY(event)
+    }, false)
+
+    el_hitarea.addEventListener('touchend', function(event) {
+        updateEventname('touchend')
+        updateXY(event)
+        el_hitarea.style.backgroundColor = 'blue'
+    }, false)
+    </script>
+</body>
+</html>
